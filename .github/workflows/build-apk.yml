@@ -26,13 +26,22 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
       - name: Make gradlew executable
         run: chmod +x android/gradlew
+
+      - name: Fix Gradle wrapper version
+        run: |
+          cd android
+          sed -i 's|gradle-.*-all.zip|gradle-8.2.1-all.zip|g' gradle/wrapper/gradle-wrapper.properties
+          sed -i 's|gradle-.*-bin.zip|gradle-8.2.1-bin.zip|g' gradle/wrapper/gradle-wrapper.properties
 
       - name: Build Debug APK
         run: |
           cd android
-          ./gradlew assembleDebug
+          ./gradlew assembleDebug --warning-mode=all
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
