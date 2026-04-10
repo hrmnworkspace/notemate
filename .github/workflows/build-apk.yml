@@ -17,14 +17,14 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
-        run: npm install
-
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
+
+      - name: Install dependencies
+        run: npm install
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
@@ -32,16 +32,12 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x android/gradlew
 
-      - name: Fix Gradle wrapper version
-        run: |
-          cd android
-          sed -i 's|gradle-.*-all.zip|gradle-8.2.1-all.zip|g' gradle/wrapper/gradle-wrapper.properties
-          sed -i 's|gradle-.*-bin.zip|gradle-8.2.1-bin.zip|g' gradle/wrapper/gradle-wrapper.properties
-
       - name: Build Debug APK
+        env:
+          JAVA_HOME: ${{ env.JAVA_HOME }}
         run: |
           cd android
-          ./gradlew assembleDebug --warning-mode=all
+          ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
