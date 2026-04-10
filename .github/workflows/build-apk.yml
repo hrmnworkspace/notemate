@@ -29,15 +29,23 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Create missing cordova variables file
+        run: |
+          mkdir -p android/capacitor-cordova-android-plugins
+          echo 'ext { cordovaAndroidVersion = "10.1.1" }' > android/capacitor-cordova-android-plugins/cordova.variables.gradle
+
       - name: Make gradlew executable
         run: chmod +x android/gradlew
 
-      - name: Build Debug APK
-        env:
-          JAVA_HOME: ${{ env.JAVA_HOME }}
+      - name: Fix Gradle wrapper version
         run: |
           cd android
-          ./gradlew assembleDebug --no-daemon --stacktrace
+          sed -i 's|distributionUrl=.*|distributionUrl=https\\://services.gradle.org/distributions/gradle-8.7-all.zip|g' gradle/wrapper/gradle-wrapper.properties
+
+      - name: Build Debug APK
+        run: |
+          cd android
+          ./gradlew assembleDebug --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
