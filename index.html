@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NoteMate</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo">📝 NoteMate</div>
+    <p class="tagline">Your thoughts, always in sync.</p>
+  </header>
+
+  <main class="main">
+    <div id="notesGrid" class="notes-grid">
+      <p class="empty-msg">No notes yet. Click + to add one.</p>
+    </div>
+  </main>
+
+  <!-- FAB -->
+  <button id="fab" class="fab">+</button>
+
+  <!-- Modal -->
+  <div id="modal" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>New Note</h2>
+        <button id="closeModal" class="close-btn">✕</button>
+      </div>
+      <input id="noteTitle" type="text" placeholder="Title" class="input-field" />
+      <textarea id="noteContent" placeholder="Write your note..." class="textarea-field" rows="6"></textarea>
+      <button id="addBtn" class="save-btn">Save Note</button>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

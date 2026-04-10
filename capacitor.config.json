@@ -1,0 +1,8 @@
+{
+  "appId": "com.harman.notemate",
+  "appName": "NoteMate",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}

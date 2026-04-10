@@ -1,0 +1,17 @@
+{
+  "name": "notemate",
+  "version": "1.0.0",
+  "description": "NoteMate - Notes app",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/android": "^8.3.0",
+    "@capacitor/cli": "^8.3.0",
+    "@capacitor/core": "^8.3.0"
+  }
+}
